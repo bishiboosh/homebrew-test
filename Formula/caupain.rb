@@ -25,7 +25,7 @@ class Caupain < Formula
       if Hardware::CPU.arm?
         "macosArm64"
       else
-        "macosX6"
+        "macosX64"
       end
     bin.install "cli/build/bin/#{folder}/releaseExecutable/caupain.kexe" => "caupain"
     # bash_completion.install "cli/completions/bash-completions.sh" => "caupain"
