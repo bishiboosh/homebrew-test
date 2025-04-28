@@ -8,7 +8,12 @@ class Caupain < Formula
   depends_on "openjdk@17" => :build
 
   def install
-    ENV["GRADLE_OPTS"] = '-Dorg.gradle.configureondemand=true -Dkotlin.incremental=false -Dorg.gradle.project.kotlin.incremental.multiplatform=false -Dorg.gradle.project.kotlin.native.disableCompilerDaemon=true -Dorg.gradle.jvmargs="-Xmx12g -Dfile.encoding=UTF-8"'
+    ENV["GRADLE_OPTS"] = '-Dorg.gradle.configureondemand=true \
+    -Dkotlin.incremental=false \
+    -Dorg.gradle.project.kotlin.incremental.multiplatform=false \
+    -Dorg.gradle.project.kotlin.native.disableCompilerDaemon=true \
+    -Dorg.gradle.jvmargs="-Xmx12g \
+    -Dfile.encoding=UTF-8"'
     task =
       if OS.mac?
         if Hardware::CPU.arm? then ":cli:macosArm64Binaries"
@@ -29,9 +34,9 @@ class Caupain < Formula
         "linuxX64"
       end
     bin.install "cli/build/bin/#{folder}/releaseExecutable/caupain.kexe" => "caupain"
-    #bash_completion.install "cli/completions/bash-completions.sh" => "caupain"
-    #fish_completion.install "cli/completions/fish-completions.sh"
-    #zsh_completion.install "cli/completions/zsh-completions.sh" => "_caupain"
+    # bash_completion.install "cli/completions/bash-completions.sh" => "caupain"
+    # fish_completion.install "cli/completions/fish-completions.sh"
+    # zsh_completion.install "cli/completions/zsh-completions.sh" => "_caupain"
   end
 
   test do
