@@ -5,9 +5,7 @@ class Caupain < Formula
   sha256 "9bbd11ce5fde4ccc9d645f340e2f11c305bbb377de9b9a6dfc87d2a69feea61f"
   license "MIT"
 
-  depends_on "libxcrypt" => :build
   depends_on "openjdk@17" => :build
-  depends_on "zlib" => :build
 
   def install
     ENV["GRADLE_OPTS"] = '-Dorg.gradle.configureondemand=true \
@@ -17,23 +15,17 @@ class Caupain < Formula
     -Dorg.gradle.jvmargs="-Xmx12g \
     -Dfile.encoding=UTF-8"'
     task =
-      if OS.mac?
-        if Hardware::CPU.arm? then ":cli:macosArm64Binaries"
-        else
-          ":cli:macosX64Binaries"
-        end
+      if Hardware::CPU.arm?
+        ":cli:macosArm64Binaries"
       else
-        "cli:linuxX64Binaries"
+        ":cli:macosX64Binaries"
       end
     system "./gradlew", task
     folder =
-      if OS.mac?
-        if Hardware::CPU.arm? then "macosArm64"
-        else
-          "macosX6"
-        end
+      if Hardware::CPU.arm?
+        "macosArm64"
       else
-        "linuxX64"
+        "macosX6"
       end
     bin.install "cli/build/bin/#{folder}/releaseExecutable/caupain.kexe" => "caupain"
     # bash_completion.install "cli/completions/bash-completions.sh" => "caupain"
