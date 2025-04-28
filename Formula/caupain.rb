@@ -28,7 +28,7 @@ class Caupain < Formula
       else
         "linuxX64"
       end
-    bin.install "cli/build/#{folder}/releaseExecutable/caupain.kexe" => "caupain"
+    bin.install "cli/build/bin/#{folder}/releaseExecutable/caupain.kexe" => "caupain"
     bash_completion.install "cli/completions/bash-completions.sh" => "caupain"
     fish_completion.install "cli/completions/fish-completions.sh"
     zsh_completion.install "cli/completions/zsh-completions.sh" => "_caupain"
