@@ -8,8 +8,28 @@ class Caupain < Formula
   depends_on "openjdk" => :build
 
   def install
-    system "./gradlew", (OS.mac?) ? ((Hardware::CPU.arm?) ? ":cli:macosArm64Binaries" : ":cli:macosX64Binaries") : "cli:linuxX64Binaries"
-    bin.install "cli/build/#{(OS.mac?) ? ((Hardware::CPU.arm?) ? "macosArm64" : ":macosX64") : "linuxX64"}/releaseExecutable/caupain.kexe" => "caupain"
+    task =
+      if OS.mac ? then
+        if Hardware::CPU.arm ? then 
+          ":cli:macosArm64Binaries"
+        else
+          ":cli:macosX64Binaries"
+        end
+      else
+        "cli:linuxX64Binaries"
+      end
+    system "./gradlew", task
+    folder =
+      if OS.mac ? then
+        if Hardware::CPU.arm ? then 
+          "macosArm64"
+        else
+          "macosX6"
+        end
+      else
+        "linuxX64"
+      end
+    bin.install "cli/build/#{folder}/releaseExecutable/caupain.kexe" => "caupain"
     bash_completion.install "cli/completions/bash-completions.sh" => "caupain"
     fish_completion.install "cli/completions/fish-completions.sh"
     zsh_completion.install "cli/completions/zsh-completions.sh" => "_caupain"
