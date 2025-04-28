@@ -6,6 +6,8 @@ class Caupain < Formula
   license "MIT"
 
   depends_on "openjdk@17" => :build
+  depends_on "libxcrypt" => :build
+  depends_on "zlib" => :build
 
   def install
     ENV["GRADLE_OPTS"] = '-Dorg.gradle.configureondemand=true \
