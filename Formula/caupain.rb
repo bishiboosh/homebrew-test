@@ -5,8 +5,8 @@ class Caupain < Formula
   sha256 "9bbd11ce5fde4ccc9d645f340e2f11c305bbb377de9b9a6dfc87d2a69feea61f"
   license "MIT"
 
-  depends_on "openjdk@17" => :build
   depends_on "libxcrypt" => :build
+  depends_on "openjdk@17" => :build
   depends_on "zlib" => :build
 
   def install
