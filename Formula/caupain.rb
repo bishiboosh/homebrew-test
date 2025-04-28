@@ -9,9 +9,8 @@ class Caupain < Formula
 
   def install
     task =
-      if OS.mac ? then
-        if Hardware::CPU.arm ? then 
-          ":cli:macosArm64Binaries"
+      if OS.mac?
+        if Hardware::CPU.arm? then ":cli:macosArm64Binaries"
         else
           ":cli:macosX64Binaries"
         end
@@ -20,9 +19,8 @@ class Caupain < Formula
       end
     system "./gradlew", task
     folder =
-      if OS.mac ? then
-        if Hardware::CPU.arm ? then 
-          "macosArm64"
+      if OS.mac?
+        if Hardware::CPU.arm? then "macosArm64"
         else
           "macosX6"
         end
